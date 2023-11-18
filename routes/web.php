@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -133,4 +134,11 @@ Route::get('/auth/callback', function () {
 
     Auth::login($user);
     return redirect('/dashboard');
+});
+
+Route::middleware('auth')->group(function(){
+    Route::resource('/ticket', TicketController::class);
+        // return get('ticket.create', [TicketController::class, 'create'])->name('ticket.create');
+        // return post('ticket.create', [TicketController::class, 'store'])->name('ticket.store');
+
 });
